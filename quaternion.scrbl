@@ -1,7 +1,7 @@
 #lang scribble/manual
 
 @require[
-         @for-label[quaternion
+         @for-label[;quaternion
                     racket
                     racket/base
                     racket/flonum
@@ -68,17 +68,32 @@ Positive rotation is anticlockwise!
 Applyes the rotation on an object.
 Object quaternion's w has to be 0!
 
-@section{Example}
+@section{Examples}
 
 
 @racketblock[
+             (code:comment "Rotation about one axis:")
   (let*
-    ([A (q-rotation (fl/ pi 2.0) (qvector 0.0 1.0 0.0))](code:comment ";Rotation 90degrees about Y-axis.")
-     [B (q-rotate A (quaternion 0.0 (qvector 0.0 0.0 1.0)))])(code:comment ";Apply rotation on quaternion with A.")
+    ([A (q-rotation (fl/ pi 2.0) (qvector 0.0 1.0 0.0))](code:comment "Rotation 90degrees about Y-axis.")
+     [B (q-rotate A (quaternion 0.0 (qvector 0.0 0.0 1.0)))])(code:comment "Apply rotation on quaternion with A.")
   (begin
-  (printf "X: ~a\n" (~r(qvector-x (quaternion-v B))))(code:comment ";Print results.")
+  (printf "X: ~a\n" (~r(qvector-x (quaternion-v B))))(code:comment "Print results.")
   (printf "Y: ~a\n" (~r(qvector-y (quaternion-v B))))
   (printf "Z: ~a\n" (~r(qvector-z (quaternion-v B))))
   ))
  ]
 
+
+@racketblock[
+             (code:comment "Rotation about two axis:")
+  (let*
+    ([A1 (q-rotation (fl/ pi 4.0) (qvector 0.0 1.0 0.0))](code:comment "Rotation 90degrees about Y-axis.")
+     [A2 (q-rotation (fl/ pi 4.0) (qvector 1.0 0.0 0.0))](code:comment "Rotation 90degrees about X-axis.")
+     [AS (q-multiply-qq A1 A2)](code:comment "Combine rotations.")
+     [B (q-rotate AS (quaternion 0.0 (qvector 0.0 0.0 1.0)))])(code:comment "Apply rotation on quaternion with A.")
+  (begin
+  (printf "X: ~a\n" (~r(qvector-x (quaternion-v B))))(code:comment "Print results.")
+  (printf "Y: ~a\n" (~r(qvector-y (quaternion-v B))))
+  (printf "Z: ~a\n" (~r(qvector-z (quaternion-v B))))
+  ))
+ ]
