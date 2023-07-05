@@ -8,7 +8,7 @@
 (define build-deps '("typed-racket-doc"
                      "racket-doc"
                      "math-doc"))
-(define scribblings '(["quaternion.scrbl" () ("3D")]))
+(define scribblings '(["quaternion.scrbl" () ("Math and Science")]))
 (define pkg-desc "Quaternions")
 (define version "1.0")
 (define pkg-authors '(APOS80))
